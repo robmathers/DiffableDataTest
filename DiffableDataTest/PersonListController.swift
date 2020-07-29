@@ -23,3 +23,10 @@ class PersonListController: UICollectionViewController {
         return layout
     }
 }
+
+extension PersonListController {
+    enum Section: CaseIterable {
+        case main
+    }
+}
+}
