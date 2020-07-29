@@ -9,6 +9,8 @@
 import UIKit
 
 class PersonListController: UICollectionViewController {
+    private let personService = PersonService()
+    
     private lazy var dataSource = UICollectionViewDiffableDataSource<Section, Person>(collectionView: collectionView) { (collectionView, index, person) -> UICollectionViewCell? in
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonListCell.reuseIdentifier, for: index)
         if let personCell = cell as? PersonListCell {
@@ -22,6 +24,7 @@ class PersonListController: UICollectionViewController {
         collectionView.backgroundColor = .systemGroupedBackground
         collectionView.register(UINib(nibName: "PersonListCell", bundle: .main), forCellWithReuseIdentifier: PersonListCell.reuseIdentifier)
         collectionView.collectionViewLayout = configureLayout()
+        loadInitialData()
     }
     
     private func configureLayout() -> UICollectionViewLayout {
@@ -29,6 +32,13 @@ class PersonListController: UICollectionViewController {
         layout.itemSize = CGSize(width: view.frame.width, height: 50)
         layout.minimumLineSpacing = 1
         return layout
+    }
+    
+    private func loadInitialData() {
+        var snapshot = dataSource.snapshot()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(personService.loadPeople())
+        dataSource.apply(snapshot)
     }
 }
 
