@@ -47,10 +47,7 @@ class PersonListController: UICollectionViewController {
     
     private func shuffleList() {
         var snapshot = dataSource.snapshot()
-        let shuffled = snapshot.itemIdentifiers.shuffled()
-        snapshot.deleteAllItems()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(shuffled)
+        snapshot.replaceWithItems(snapshot.itemIdentifiers.shuffled())
         dataSource.apply(snapshot)
     }
 }
