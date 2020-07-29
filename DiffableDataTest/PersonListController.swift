@@ -15,8 +15,10 @@ class PersonListController: UICollectionViewController {
         case descending
     }
     
+    // MARK: - IBOutlets
     @IBOutlet private weak var sortButton: UIBarButtonItem!
     
+    // MARK: - Private Properties
     private let personService = PersonService()
     private var sorted: SortState = .unsorted {
         didSet {
@@ -28,6 +30,7 @@ class PersonListController: UICollectionViewController {
         }
     }
     
+    // MARK: - Data Source
     private lazy var dataSource = UICollectionViewDiffableDataSource<Section, Person>(collectionView: collectionView) { (collectionView, index, person) -> UICollectionViewCell? in
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonListCell.reuseIdentifier, for: index)
         if let personCell = cell as? PersonListCell {
@@ -39,6 +42,7 @@ class PersonListController: UICollectionViewController {
         return cell
     }
     
+    // MARK: - Setup
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .systemGroupedBackground
@@ -61,6 +65,7 @@ class PersonListController: UICollectionViewController {
         dataSource.apply(snapshot)
     }
     
+    // MARK: - IBActions
     @IBAction private func didTapAddButton(_ sender: Any) {
         addPerson()
     }
@@ -73,6 +78,7 @@ class PersonListController: UICollectionViewController {
         shuffleList()
     }
     
+    // MARK: - Action Methods
     private func addPerson() {
         var snapshot = dataSource.snapshot()
         let newPerson = personService.loadPeople(count: 1)
@@ -128,12 +134,14 @@ class PersonListController: UICollectionViewController {
     }
 }
 
+// MARK: - Sections
 extension PersonListController {
     enum Section: CaseIterable {
         case main
     }
 }
 
+// MARK: Diffable Data Source Methods
 fileprivate extension NSDiffableDataSourceSnapshot
     where ItemIdentifierType == Person, SectionIdentifierType == PersonListController.Section
 {
