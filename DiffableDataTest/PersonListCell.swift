@@ -19,6 +19,12 @@ final class PersonListCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        contentView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
+        contentView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        contentView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        
         initialLabel.layer.cornerRadius = 10
         initialLabel.layer.cornerCurve = .continuous
         initialLabel.layer.masksToBounds = true
@@ -33,6 +39,22 @@ final class PersonListCell: UICollectionViewCell {
         initialLabel.backgroundColor = .systemBackground
         
         nameLabel.text = nil
+    }
+    
+    override func systemLayoutSizeFitting(
+        _ targetSize: CGSize,
+        withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority,
+        verticalFittingPriority: UILayoutPriority
+    ) -> CGSize {
+        // Use the target size with a large height, so the height is variable, and width is fixed
+        var flexibleHeight = targetSize
+        flexibleHeight.height = CGFloat.greatestFiniteMagnitude
+        
+        return super.systemLayoutSizeFitting(
+            flexibleHeight,
+            withHorizontalFittingPriority: .required,
+            verticalFittingPriority: .fittingSizeLevel
+        )
     }
     
     func update(with name: String) {

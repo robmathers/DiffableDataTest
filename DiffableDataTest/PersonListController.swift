@@ -53,7 +53,8 @@ class PersonListController: UICollectionViewController {
     
     private func configureLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: view.frame.width, height: 50)
+        layout.estimatedItemSize = CGSize(width: view.frame.width, height: 50)
+        layout.itemSize = UICollectionViewFlowLayout.automaticSize
         layout.minimumLineSpacing = 1
         return layout
     }
