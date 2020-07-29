@@ -38,9 +38,23 @@ final class PersonListCell: UICollectionViewCell {
     func update(with name: String) {
         initialLabel.text = name.first?.uppercased()
         nameLabel.text = name
+        
+        initialLabel.backgroundColor = UIColor.from(string: name)
     }
     
     @IBAction func didDoubleTap(_ sender: Any) {
         doubleTapAction?()
+    }
+}
+
+fileprivate extension UIColor {
+    static func from(string: String) -> UIColor {
+        guard !string.isEmpty else { return .white }
+        let hash: Int = string.hashValue
+        let red: Int = (hash & 0xFF0000) >> 16
+        let green: Int = (hash & 0x00FF00) >> 8
+        let blue: Int = (hash & 0x0000FF)
+        
+        return UIColor(red: CGFloat(red)/255, green: CGFloat(green)/255, blue: CGFloat(blue)/255, alpha: 1)
     }
 }
