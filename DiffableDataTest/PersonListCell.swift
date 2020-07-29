@@ -14,12 +14,18 @@ final class PersonListCell: UICollectionViewCell {
     @IBOutlet private weak var initialLabel: UILabel!
     @IBOutlet private weak var nameLabel: UILabel!
     
+    var doubleTapAction: (() -> Void)?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         initialLabel.layer.cornerRadius = 10
         initialLabel.layer.cornerCurve = .continuous
         initialLabel.layer.masksToBounds = true
+        
+        let doubleTapGesture = UITapGestureRecognizer(target: self, action: #selector(didDoubleTap))
+        doubleTapGesture.numberOfTapsRequired = 2
+        addGestureRecognizer(doubleTapGesture)
     }
 
     override func prepareForReuse() {
@@ -32,5 +38,9 @@ final class PersonListCell: UICollectionViewCell {
     func update(with name: String) {
         initialLabel.text = name.first?.uppercased()
         nameLabel.text = name
+    }
+    
+    @IBAction func didDoubleTap(_ sender: Any) {
+        doubleTapAction?()
     }
 }
