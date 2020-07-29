@@ -9,4 +9,9 @@
 import UIKit
 
 class PersonListController: UICollectionViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        collectionView.backgroundColor = .systemGroupedBackground
+        collectionView.register(UINib(nibName: "PersonListCell", bundle: .main), forCellWithReuseIdentifier: PersonListCell.reuseIdentifier)
+    }
 }
