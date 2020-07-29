@@ -13,5 +13,13 @@ class PersonListController: UICollectionViewController {
         super.viewDidLoad()
         collectionView.backgroundColor = .systemGroupedBackground
         collectionView.register(UINib(nibName: "PersonListCell", bundle: .main), forCellWithReuseIdentifier: PersonListCell.reuseIdentifier)
+        collectionView.collectionViewLayout = configureLayout()
+    }
+    
+    private func configureLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewFlowLayout()
+        layout.itemSize = CGSize(width: view.frame.width, height: 50)
+        layout.minimumLineSpacing = 1
+        return layout
     }
 }
