@@ -9,7 +9,24 @@
 import UIKit
 
 class PersonListController: UICollectionViewController {
+    private enum SortState {
+        case unsorted
+        case ascending
+        case descending
+    }
+    
+    @IBOutlet private weak var sortButton: UIBarButtonItem!
+    
     private let personService = PersonService()
+    private var sorted: SortState = .unsorted {
+        didSet {
+            switch sorted {
+            case .unsorted: sortButton.image = UIImage(systemName: "arrowtriangle.up")
+            case .ascending: sortButton.image = UIImage(systemName: "arrowtriangle.up.fill")
+            case .descending: sortButton.image = UIImage(systemName: "arrowtriangle.down.fill")
+            }
+        }
+    }
     
     private lazy var dataSource = UICollectionViewDiffableDataSource<Section, Person>(collectionView: collectionView) { (collectionView, index, person) -> UICollectionViewCell? in
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonListCell.reuseIdentifier, for: index)
@@ -41,14 +58,35 @@ class PersonListController: UICollectionViewController {
         dataSource.apply(snapshot)
     }
     
+    @IBAction func didTapSortButton(_ sender: Any) {
+        sortList()
+    }
+    
     @IBAction func didTapShuffleButton(_ sender: Any) {
         shuffleList()
+    }
+    
+    private func sortList() {
+        var snapshot = dataSource.snapshot()
+        var sortedList = snapshot.itemIdentifiers.sorted()
+        
+        if sorted == .ascending {
+            sortedList.reverse()
+            sorted = .descending
+        }
+        else {
+            sorted = .ascending
+        }
+        
+        snapshot.replaceWithItems(sortedList)
+        dataSource.apply(snapshot)
     }
     
     private func shuffleList() {
         var snapshot = dataSource.snapshot()
         snapshot.replaceWithItems(snapshot.itemIdentifiers.shuffled())
         dataSource.apply(snapshot)
+        sorted = .unsorted
     }
 }
 
