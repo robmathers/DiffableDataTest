@@ -9,6 +9,14 @@
 import UIKit
 
 class PersonListController: UICollectionViewController {
+    private lazy var dataSource = UICollectionViewDiffableDataSource<Section, Person>(collectionView: collectionView) { (collectionView, index, person) -> UICollectionViewCell? in
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonListCell.reuseIdentifier, for: index)
+        if let personCell = cell as? PersonListCell {
+            personCell.update(with: person.name)
+        }
+        return cell
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.backgroundColor = .systemGroupedBackground
