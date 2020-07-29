@@ -40,6 +40,19 @@ class PersonListController: UICollectionViewController {
         snapshot.appendItems(personService.loadPeople())
         dataSource.apply(snapshot)
     }
+    
+    @IBAction func didTapShuffleButton(_ sender: Any) {
+        shuffleList()
+    }
+    
+    private func shuffleList() {
+        var snapshot = dataSource.snapshot()
+        let shuffled = snapshot.itemIdentifiers.shuffled()
+        snapshot.deleteAllItems()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(shuffled)
+        dataSource.apply(snapshot)
+    }
 }
 
 extension PersonListController {
