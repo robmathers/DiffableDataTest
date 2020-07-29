@@ -32,6 +32,9 @@ class PersonListController: UICollectionViewController {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonListCell.reuseIdentifier, for: index)
         if let personCell = cell as? PersonListCell {
             personCell.update(with: person.name)
+            personCell.doubleTapAction = {
+                self.deletePerson(person)
+            }
         }
         return cell
     }
@@ -92,6 +95,12 @@ class PersonListController: UICollectionViewController {
             snapshot.replaceWithItems(updatedList)
         }
         
+        dataSource.apply(snapshot)
+    }
+    
+    private func deletePerson(_ person: Person) {
+        var snapshot = dataSource.snapshot()
+        snapshot.deleteItems([person])
         dataSource.apply(snapshot)
     }
     
