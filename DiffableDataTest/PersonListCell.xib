@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PersonListCell" id="tMr-QL-xKd" customClass="PersonListCell" customModule="DiffableDataTest" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="kkS-q8-v5x">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="A" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q2u-6J-uBl">
+                        <rect key="frame" x="16" y="9.5" width="41" height="41"/>
+                        <color key="backgroundColor" systemColor="systemTealColor" red="0.35294117650000001" green="0.7843137255" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="q2u-6J-uBl" secondAttribute="height" id="igD-aw-vVA"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle0"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Last" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="srl-x9-Sve">
+                        <rect key="frame" x="65" y="8" width="290" height="44"/>
+                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <gestureRecognizers/>
+                <constraints>
+                    <constraint firstItem="srl-x9-Sve" firstAttribute="leading" secondItem="q2u-6J-uBl" secondAttribute="trailing" constant="8" symbolic="YES" id="7LX-Gf-YOx"/>
+                    <constraint firstAttribute="trailing" secondItem="srl-x9-Sve" secondAttribute="trailing" constant="20" symbolic="YES" id="8rf-5W-2Jj"/>
+                    <constraint firstItem="srl-x9-Sve" firstAttribute="top" secondItem="kkS-q8-v5x" secondAttribute="top" constant="8" id="D8t-kz-QCq"/>
+                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="q2u-6J-uBl" secondAttribute="bottom" constant="8" id="LUq-pe-vkZ"/>
+                    <constraint firstItem="q2u-6J-uBl" firstAttribute="leading" secondItem="kkS-q8-v5x" secondAttribute="leadingMargin" id="QDs-Fb-ouR"/>
+                    <constraint firstItem="q2u-6J-uBl" firstAttribute="top" relation="greaterThanOrEqual" secondItem="kkS-q8-v5x" secondAttribute="top" constant="8" id="f1e-9Q-41r"/>
+                    <constraint firstItem="q2u-6J-uBl" firstAttribute="firstBaseline" secondItem="srl-x9-Sve" secondAttribute="firstBaseline" id="jZH-Tn-iuF"/>
+                    <constraint firstItem="q2u-6J-uBl" firstAttribute="centerY" secondItem="kkS-q8-v5x" secondAttribute="centerY" id="l5J-iK-82I"/>
+                    <constraint firstAttribute="bottom" secondItem="srl-x9-Sve" secondAttribute="bottom" constant="8" id="yjo-mr-511"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="jZH-Tn-iuF"/>
+                    </mask>
+                </variation>
+            </collectionViewCellContentView>
+            <gestureRecognizers/>
+            <size key="customSize" width="375" height="60"/>
+            <connections>
+                <outlet property="initialLabel" destination="q2u-6J-uBl" id="d8a-kt-zku"/>
+                <outlet property="nameLabel" destination="srl-x9-Sve" id="cCv-gM-8oe"/>
+            </connections>
+            <point key="canvasLocation" x="-247.10144927536234" y="-32.142857142857139"/>
+        </collectionViewCell>
+    </objects>
+</document>
