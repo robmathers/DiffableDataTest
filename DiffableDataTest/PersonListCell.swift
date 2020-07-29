@@ -30,7 +30,7 @@ final class PersonListCell: UICollectionViewCell {
 
     override func prepareForReuse() {
         initialLabel.text = nil
-        initialLabel.backgroundColor = .white
+        initialLabel.backgroundColor = .systemBackground
         
         nameLabel.text = nil
     }

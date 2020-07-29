@@ -33,7 +33,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
-                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                 <gestureRecognizers/>
                 <constraints>
                     <constraint firstItem="srl-x9-Sve" firstAttribute="leading" secondItem="q2u-6J-uBl" secondAttribute="trailing" constant="8" symbolic="YES" id="7LX-Gf-YOx"/>
