@@ -58,12 +58,41 @@ class PersonListController: UICollectionViewController {
         dataSource.apply(snapshot)
     }
     
+    @IBAction private func didTapAddButton(_ sender: Any) {
+        addPerson()
+    }
+    
     @IBAction func didTapSortButton(_ sender: Any) {
         sortList()
     }
     
     @IBAction func didTapShuffleButton(_ sender: Any) {
         shuffleList()
+    }
+    
+    private func addPerson() {
+        var snapshot = dataSource.snapshot()
+        let newPerson = personService.loadPeople(count: 1)
+        
+        if sorted == .unsorted {
+            if let firstPerson = snapshot.itemIdentifiers.first {
+                snapshot.insertItems(newPerson, beforeItem: firstPerson)
+            }
+            else {
+                snapshot.appendItems(newPerson)
+            }
+        }
+        else {
+            var updatedList = snapshot.itemIdentifiers
+            updatedList.append(contentsOf: newPerson)
+            updatedList.sort()
+            if sorted == .descending {
+                updatedList.reverse()
+            }
+            snapshot.replaceWithItems(updatedList)
+        }
+        
+        dataSource.apply(snapshot)
     }
     
     private func sortList() {
