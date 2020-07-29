@@ -48,6 +48,9 @@ class PersonListController: UICollectionViewController {
         collectionView.backgroundColor = .systemGroupedBackground
         collectionView.register(UINib(nibName: "PersonListCell", bundle: .main), forCellWithReuseIdentifier: PersonListCell.reuseIdentifier)
         collectionView.collectionViewLayout = configureLayout()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(updateLayoutForDynamicText), name: UIContentSizeCategory.didChangeNotification, object: nil)
+
         loadInitialData()
     }
     
@@ -63,6 +66,13 @@ class PersonListController: UICollectionViewController {
         var snapshot = dataSource.snapshot()
         snapshot.appendSections([.main])
         snapshot.appendItems(personService.loadPeople())
+        dataSource.apply(snapshot)
+    }
+    
+    @objc private func updateLayoutForDynamicText() {
+        collectionViewLayout.invalidateLayout()
+        var snapshot = dataSource.snapshot()
+        snapshot.reloadSections(snapshot.sectionIdentifiers)
         dataSource.apply(snapshot)
     }
     
