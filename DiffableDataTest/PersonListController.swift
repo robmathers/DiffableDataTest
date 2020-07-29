@@ -60,4 +60,13 @@ extension PersonListController {
         case main
     }
 }
+
+fileprivate extension NSDiffableDataSourceSnapshot
+    where ItemIdentifierType == Person, SectionIdentifierType == PersonListController.Section
+{
+    mutating func replaceWithItems(_ newItems: [ItemIdentifierType]) {
+        deleteAllItems()
+        appendSections([.main])
+        appendItems(newItems)
+    }
 }
